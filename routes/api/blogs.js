@@ -4,5 +4,11 @@ const blogsCtrl = require('../../controllers/api/blogs')
 
 // GET /api/v1/blogs
 router.get('/', blogsCtrl.index)
+// POST /api/v1/blogs
+router.post('/', blogsCtrl.create)
+// PUT /api/v1/blogs/:id
+router.put('/:id', blogsCtrl.update)
+ 
 
-module.exports= router
+
+module.exports = router
