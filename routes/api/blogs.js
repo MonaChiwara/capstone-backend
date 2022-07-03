@@ -8,7 +8,8 @@ router.get('/', blogsCtrl.index)
 router.post('/', blogsCtrl.create)
 // PUT /api/v1/blogs/:id
 router.put('/:id', blogsCtrl.update)
- 
+// DELETE /api/v1/blogs/:id
+router.delete('/:id', blogsCtrl.remove)
 
 
 module.exports = router

@@ -12,6 +12,7 @@ Blog database
 Date | Progress | Blockers | Goals |
 ----- | ----- | -----| ----- |
 06/30/22 | Folder structures created. User & Blog models created | None | Connect to DB. Create routes and controllers for Blog model. |
+07/02/22 | CRUD on blogs and users. Populating favorites | None | Auth
 
 ***
 

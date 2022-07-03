@@ -8,7 +8,14 @@ require('./config/database')
 app.use(express.json())
 
 // ==== ROUTES ====
+// Users
+// app.use('/api/v1/users', require('.routes/api/users.js'))
+app.use('/api/v1/users', require('./routes/api/users'))
+
+// Blogs
 app.use('/api/v1/blogs', require('./routes/api/blogs.js'))
+
+
 
 // ==== PORT ====
 const PORT = 8070

@@ -30,9 +30,20 @@ const update = async (req, res) => {
     }
 }
 
+//Delete a blog
+const remove = async (req, res) => {
+    try {
+        const deletedBlog = await Blog.findByIdAndDelete(req.params.id)
+        res.status(200).json(deletedBlog)
+    } catch(e) {
+        res.status(400).json({msg: e.message})
+    }
+}
+
 module.exports = {
     index, 
     create,
     update,
+    remove,
 
 }
