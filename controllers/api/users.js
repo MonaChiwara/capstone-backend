@@ -1,5 +1,5 @@
 const User = require('../../models/User')
-// const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt')
 // const jwt = require('jsonwebtoken')
 
 // Create a user
@@ -55,7 +55,7 @@ const update = async (req, res) => {
     try {
         // Pre and post save() hooks are not executed on update(), findOneAndUpdate(), etc.
         // We need to handle our password update hash here and not as a pre-hook
-        // req.body.password = await bcrypt.hash(req.body.password, 10)
+        req.body.password = await bcrypt.hash(req.body.password, 10)
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true})
         res.status(200).json(updatedUser)
     } catch(e) {

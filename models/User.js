@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-// const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt')
 const saltRounds = 10
 
 const userSchema = new Schema({
@@ -47,8 +47,8 @@ const userSchema = new Schema({
 
 userSchema.pre('save', async function(next) {
     // This will only hash the password for our newly created user
-    // this.password = await bcrypt.hash(this.password, saltRounds)
-    // return next()
+    this.password = await bcrypt.hash(this.password, saltRounds)
+    return next()
 })
 
 module.exports = mongoose.model('User', userSchema)
