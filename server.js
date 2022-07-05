@@ -7,13 +7,21 @@ require('./config/database')
 // ===== MIDDLEWARES =====
 app.use(express.json())
 
+//Check if token and create req.user
+app.use(require('./config/checkToken'))
+// app.use(cors())
+
 // ==== ROUTES ====
 // Users
-// app.use('/api/v1/users', require('.routes/api/users.js'))
+
 app.use('/api/v1/users', require('./routes/api/users'))
 
+// Protect API routes below fromunauthorized users
+const ensureLoggedIn = require('./config/ensureLoggedIn')
+
 // Blogs
-app.use('/api/v1/blogs', require('./routes/api/blogs.js'))
+app.use('/api/v1/blogs', ensureLoggedIn, require('./routes/api/blogs.js'))
+
 
 
 

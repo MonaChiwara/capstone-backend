@@ -1,6 +1,6 @@
 const User = require('../../models/User')
 const bcrypt = require('bcrypt')
-// const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 
 // Create a user
 const create = async (req, res) => {
@@ -22,11 +22,8 @@ const login = async (req, res) => {
 
         // Throw error if user is not found
         if(!user) throw new Error()
-
-        // compare() takes the user's input from req.body, hashes it, and compares it to our db hashed pw
-        // compare() incorporates the encoding process in the db hashed pw and uses the same encoding process with the user's input
         
-        // const match = await bcrypt.compare(req.body.password, user.password)
+        const match = await bcrypt.compare(req.body.password, user.password)
 
         // If the pws don't match throw error
         if(!match) throw new Error()
@@ -53,8 +50,6 @@ const show = async (req, res) => {
 // Update a user
 const update = async (req, res) => {
     try {
-        // Pre and post save() hooks are not executed on update(), findOneAndUpdate(), etc.
-        // We need to handle our password update hash here and not as a pre-hook
         req.body.password = await bcrypt.hash(req.body.password, 10)
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true})
         res.status(200).json(updatedUser)
@@ -74,7 +69,6 @@ const getFavorites = async (req, res) => {
 }
 
 // Helper Function
-// JWT is created with a secret key and that secret key is private to you which means you will never reveal that to the public or inject inside the JWT token.
 const createJWT = user => {
     return jwt.sign(
         // payload
