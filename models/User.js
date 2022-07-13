@@ -12,6 +12,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    userName: {
+        type: String,
+        // required: true
+    },
     email: {
         type: String,
         trim: true,
@@ -27,6 +31,7 @@ const userSchema = new Schema({
         required: true
     },
     picture: String,
+    biography: String,
     favorites: [
         {
             type: Schema.Types.ObjectId,
